@@ -1,0 +1,95 @@
+body{
+    margin: 0% 0% 20px 0%;
+    padding: 0%;
+    font-family: 'poppins', sans-serif;
+    background-color: rgb(10, 31, 68);
+}
+.heading{
+    font-size: 50px;
+    font-weight: bolder;
+    color: white;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.container1{
+    margin-top: 50px;
+    margin-left: 100px;
+    max-width: max-content;
+    background-color: white;
+    max-height: max-content;
+    border: 1px solid rgb(90, 95, 115);
+    border-radius: 30px;
+}
+
+#search, .fa-magnifying-glass{
+    border: none;
+    outline: none;
+    color: white;
+    padding: 20px 30px 20px 30px;
+    border-radius: 30px;
+    background-color: white;
+    color: black;
+    font-size: 23px;
+}
+#btn{
+    background-color: white;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+}
+
+
+.card2{
+    height: 387px;
+    width: 280px;
+    background-color: rgb(188, 187, 187);
+    border-radius: 30px;
+    margin: 30px 0px 0px 100px;
+    box-shadow: 0px 10px 1px rgb(84, 99, 124);
+}
+
+#city{
+    padding-top: 20px;
+    margin: 20px 0px 0px 20px;
+    color: rgb(83, 98, 124);
+    font-size: 30px;
+}
+#temp
+{
+    margin: 20px 0px 0px 20px;
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+}
+#weatherIcon{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+#state{
+    font-size: 30px;
+    color: rgb(90, 95, 115);
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+#cc{
+    background-color: orange;
+    color: white;
+    font-size: 18px;
+    padding: 2px 2px 2px 2px;
+    border-radius: 5px;
+}
+
+img{
+    border: 1px solid rgb(90, 95, 115);
+    border-radius: 1000px;
+    padding: 5px;
+    width: 140px;
+}
+#main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

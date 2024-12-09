@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="card1">
+        <div class="heading">Weather App</div>
+        <div class="container1">
+            <input type="search" name="search" id="search" placeholder="Search The City">
+        <button id="btn">
+            <i class="fa-solid fa-magnifying-glass" id="fa-solid"></i>
+        </button>
+        </div>
+    </div>
+
+    <div id="main"></div>
+</body>
+<script>
+    const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?units=metric&q=';
+    const apiKey = '3c75e8fe81ec2d9a6fc58ce352b4b4bf'; 
+    const search = document.getElementById('search');
+    const searchBtn = document.getElementById('fa-solid');
+    const main = document.getElementById('main');
+
+    function updateWeather(city) {
+        fetch(`${apiUrl}${city}&appid=${apiKey}`).then(res => res.json()).then(data => {
+            console.log(data);
+
+            if (data.cod == 200) {
+                let get = localStorage.getItem('user');
+                if (get) {
+                    get = JSON.parse(get);
+
+                    let cityExists = false;
+                    for (let i = 0; i < get.length; i++) {
+                        if (get[i].name.toLowerCase() === data.name.toLowerCase()) {
+                            cityExists = true;
+                            break;
+                        }
+                    }
+
+                    if (cityExists) {
+                        alert('City already exists in the list.');
+                    } else {
+                        get.push(data);
+                        localStorage.setItem('user', JSON.stringify(get));
+                        getData();
+                    }
+                } else {
+                    let newData = [data];
+                    localStorage.setItem('user', JSON.stringify(newData));
+                    getData();
+                }
+            } else {
+                console.log('City not found');
+            }
+        }).catch(error => console.log('Error:', error)); 
+    }
+    
+    
+    function getData(){
+        let get = localStorage.getItem('user');
+        get = JSON.parse(get);
+        let card = ' ';
+                get.forEach(element => {
+                    console.log(element)
+                    card += `
+                <div class="card2">
+                    <div id="city"> ${element.name} <sup id="cc">(${element.sys.country})</sup> </div>
+                    <div id="temp"> ${Math.round(element.main.temp)} <sup>°C</sup> </div>
+                    <img src="https://openweathermap.org/img/wn/${element.weather[0].icon}.png" id="weatherIcon">
+                    <div id="state"> ${element.weather[0].main} </div>
+                </div>`;
+                });
+                main.innerHTML = card;
+    }
+
+    search.addEventListener('keydown', function(event){
+        if(event.key == 13){
+            searchBtn.click();
+        }
+    })
+    searchBtn.addEventListener('click', () => {
+        const city = search.value.trim();
+        if (city) {
+            updateWeather(city);
+        } else {
+            console.log('Please enter a city name');
+        }
+    });
+</script>
+</html>
